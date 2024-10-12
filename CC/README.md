@@ -21,6 +21,9 @@ Este repositorio contiene ejemplos de código Java para ser analizados con Sonar
     http://localhost:9000/
 Aquí deberías ver la pantalla de inicio de sesión de SonarQube.
 
+Después de unos minutos (dependiendo de tu máquina), aparecerá la pantalla de LOGIN, firmate usando el user/password admin/admin  
+y actualiza tu password
+
 ### 2. Instalación de SonarScanner
 
 Para ejecutar el análisis del proyecto (si no está configurado con Maven), necesitas instalar **SonarScanner**, la herramienta que se encarga de enviar el código a SonarQube para su análisis.
