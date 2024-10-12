@@ -1,12 +1,10 @@
 # Proyecto de Análisis de Código con SonarQube
 
-Este repositorio contiene ejemplos de código Java para ser analizados con SonarQube. El objetivo es que los estudiantes puedan ver cómo SonarQube detecta problemas de código como complejidad ciclomatica, código duplicado, posibles problemas de seguridad, y más.
+Este repositorio contiene ejemplos de código Java para ser analizados con SonarQube. El objetivo es que los estudiantes puedan ver cómo SonarQube detecta problemas de código como la **complejidad ciclomatica**, **código duplicado**, **posibles problemas de seguridad**, y más.
 
 ## Estructura del Proyecto
 
 - **src/**: Contiene los archivos de código fuente Java:
-  - `Class-EvaluacionDePrestamo.java`: Evaluación de préstamos.
-  - `JuegoPiedraPapelTijera.java`: Un juego simple de piedra, papel o tijera.
   - `SistemaGestionInventario.java`: Sistema básico de gestión de inventarios.
   - `SonarQubeDemo.java`: Ejemplo que muestra diversos problemas que SonarQube puede detectar.
 
@@ -14,57 +12,59 @@ Este repositorio contiene ejemplos de código Java para ser analizados con Sonar
 
 ## Instrucciones para Ejecutar el Análisis con SonarQube
 
-1. Instala [SonarQube](https://www.sonarqube.org/) en tu máquina local.
-2. Abre un terminal en la carpeta raíz del proyecto.
-3. Ejecuta el siguiente comando para analizar el proyecto con SonarQube:
+### 1. Instalación de SonarQube
 
+- Para esta práctica, usaremos la versión gratuita de SonarQube: [SonarQube Community Edition](https://www.sonarsource.com/open-source-editions/sonarqube-community-edition/).
+- Sigue las instrucciones de instalación en el siguiente enlace: [Instrucciones de instalación](https://docs.sonarsource.com/sonarqube/9.9/try-out-sonarqube/).
+- Añade **SonarQube** al `PATH` de tu sistema para poder arrancar el servidor de SonarQube desde cualquier directorio.
+- Una vez instalado y arrancado el servidor de SonarQube, abre un navegador web y ve a la siguiente dirección:
+    http://localhost:9000/
+Aquí deberías ver la pantalla de inicio de sesión de SonarQube.
+
+### 2. Instalación de SonarScanner
+
+Para ejecutar el análisis del proyecto (si no está configurado con Maven), necesitas instalar **SonarScanner**, la herramienta que se encarga de enviar el código a SonarQube para su análisis.
+
+1. Descarga e instala SonarScanner desde el siguiente enlace: [SonarScanner](https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner/).
+2. Añade **SonarScanner** al `PATH` de tu sistema para que puedas ejecutar el comando desde cualquier directorio. Sigue las instrucciones proporcionadas en la página de instalación para asegurarte de que esté configurado correctamente.
+
+### 3. Crear un Proyecto en SonarQube
+
+SonarQube es una herramienta diseñada para integrarse en entornos de desarrollo y pipelines, pero para esta práctica la ejecutaremos de manera local.
+
+1. Crea un proyecto local en SonarQube:
+ - En la página de SonarQube, selecciona **Create Project** y elige la opción **Local project**.
+ - Se generará un **token de seguridad** que necesitarás para ejecutar el análisis del proyecto localmente. Guarda este token para usarlo en el siguiente paso.
+
+### 4. Compilación del Proyecto
+
+Para que SonarQube pueda realizar un análisis completo, es **necesario compilar el proyecto** antes de ejecutar el escaneo. SonarQube utiliza el bytecode generado por la compilación para calcular métricas avanzadas, como la **complejidad ciclomatica**, y para realizar un análisis exhaustivo del flujo de control del código.
+
+Si tu proyecto **NO** está en Maven:
+- Asegúrate de haber instalado SonarScanner (como se indicó en el paso 2).
+- Compila tu proyecto manualmente si es necesario, usando tu propio método de compilación.
+
+### 5. Ejecutar el Análisis del Proyecto
+
+1. Abre un terminal en el **directorio raíz** de tu proyecto.
+2. Ejecuta el siguiente comando para ejecutar el análisis con SonarScanner usando el token generado en el paso 3 (puedes copiarlo directamente de SonarQube):
    ```bash
-   sonar-scanner
+   sonar-scanner -Dsonar.projectKey=<tu_project_key> -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=<tu_token>
+
+Opcionalmente puedes tu correr el comando con esto:
+  Reemplaza <tu_project_key>con el nombre del proyecto que creaste en SonarQube.
+  Reemplaza <tu_token>con el token de seguridad que generaste anteriormente.
+
+Este comando enviará el código a SonarQube para que realice el análisis. La página web de SonarQube se actualizará automáticamente y mostrará el mensaje "Nuevo análisis en curso" .
 
 
-Uso de SonarQube.
-SonarQube es una herramienta de análisis estático de código, que nos ayuda a tener un
-código más limpio.
-En esta práctica usarás sonarQube para analizar un proyecto en el que hayas trabajado en
-el pasado o ejemplos de la profesora
-Usaremos esta version gratuita:
-https://www.sonarsource.com/open-source-editions/sonarqube-community-edition/
-Sigue las instrucciones en:
-https://docs.sonarsource.com/sonarqube/9.9/try-out-sonarqube/
-Al arrancar el servidor, puedes apuntar tu browser a este sitio:
-http://localhost:9000/
-Y probablemente encuentres la pantalla de iniciando....
+ ### 6. Ver los Resultados del Análisis
 
-Después de unos minutos (dependiendo de tu máquina), aparecerá la pantalla de LOGIN, firmate usando el user/password admin/admin  
-y actualiza tu password
+Una vez que el análisis haya finalizado, podrás ver un informe detallado de los problemas y mejoras detectadas en tu código. Estos incluyen problemas como **complejidad ciclomatica**, **duplicación de código**, y posibles **vulnerabilidades de seguridad**.
 
-SonarQube es una herramienta diseñada para correr en ambientes de desarrollo, dentro de un 'pipeline', no tiene mucho sentido correrla de manera local. Solo para fines de la práctica crearemos un proyecto local:
-  Create project
-  Local project
+Explora los **issues** detectados en tu código, revisa por qué SonarQube los marca como problemas, y reflexiona sobre las mejoras que puedes implementar.
 
+### Para la entrega:
 
-En el ejemplo usaré el código de Java que se encuentra en mi github
-
-Para tu práctica toma algún proyecto tuyo o que te de la profesora.
-Tiene que ser un proyecto con git, y la rama principal debe tener el nombre de la rama mayor en git: master o main.
-Para este ejemplo de práctica usaremos todos los settings por defecto
-
-IMPORTANTE
-A fin de analizar el proyecto de manera local, creamos un token de seguridad, que nos permitirá subir el código al servidor
-  Provide a token - generate a token (30 days)
-  Run analysis of your project
-
-Y obtenemos las instrucciones para analizar el proyecto de manera local:
-  Analyze your project  (el token de arriba)
-
-El token que creaste en el paso anterior aparece en la linea de comandos.
-Si tu proyecto no es ni Java o .NET, necesitas descargar la herramienta SonarScanner:
-https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner/
-
-Añade el sonarscanner a el path de tu sistema, y ejecuta el comando que aparece en "other"
-Al ejecutar esto el comando, la página de web se actualiza, mostrando el mensaje: "New analysis in progress"
-
-Al final aparecerá el reporte.
-
-Explora un rato en los issues de tu código, y ve la razón por la que se consideran problemas.
-Sube a canvas una imagen de esto, y añade una reflexión de el uso que le das a esta herramienta.
+- Sube una captura de pantalla de los resultados en **Canvas**.
+- Incluye una breve reflexión sobre el uso de SonarQube y cómo te ayudó a mejorar la calidad de tu código.
