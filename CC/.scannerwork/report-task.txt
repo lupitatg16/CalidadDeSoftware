@@ -1,6 +1,6 @@
-projectKey=TestCC2
+projectKey=Test-de-CC
 serverUrl=http://localhost:9000
 serverVersion=10.7.0.96327
-dashboardUrl=http://localhost:9000/dashboard?id=TestCC2
-ceTaskId=b893f419-d24f-4a7b-b977-7639bd8ed731
-ceTaskUrl=http://localhost:9000/api/ce/task?id=b893f419-d24f-4a7b-b977-7639bd8ed731
+dashboardUrl=http://localhost:9000/dashboard?id=Test-de-CC
+ceTaskId=f50fbfae-7461-4ee7-876a-70875b381bb1
+ceTaskUrl=http://localhost:9000/api/ce/task?id=f50fbfae-7461-4ee7-876a-70875b381bb1

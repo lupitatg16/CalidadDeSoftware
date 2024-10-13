@@ -1,0 +1,15 @@
+Comandos para Sonarqube
+
+Desde el directorio CC
+
+javac -d ./bin ./src/*.java - compilar las clases de src y que queden en bin
+
+
+javap -c ./bin/*.class  - para ver las clases de cada archivo
+
+
+Desde el directorio CC ejecutar el comando que da sonarqube
+
+sonar-scanner.bat -D"sonar.projectKey=Test-de-CC" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.token=sqp_889ad6c7969d5c60cda22723fbbbc7527ee2ee4b"
+
+

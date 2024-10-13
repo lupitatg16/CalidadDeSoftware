@@ -1,0 +1,4 @@
+Desde el subdirectorio checkstyle dentro de /PracticasCalidad/CalidadDeSoftware
+
+java -jar ./tools/checkstyle-10.18.2-all.jar -c ./tools/cc_checks.xml ./src/EvaluacionDePrestamo.java
+

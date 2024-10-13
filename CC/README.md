@@ -28,19 +28,36 @@ y actualiza tu password
 
 Para ejecutar el análisis del proyecto (si no está configurado con Maven), necesitas instalar **SonarScanner**, la herramienta que se encarga de enviar el código a SonarQube para su análisis.
 
-1. Descarga e instala SonarScanner desde el siguiente enlace: [SonarScanner](https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner/).
-2. Añade **SonarScanner** al `PATH` de tu sistema para que puedas ejecutar el comando desde cualquier directorio. Sigue las instrucciones proporcionadas en la página de instalación para asegurarte de que esté configurado correctamente.
+2.1 Descarga e instala SonarScanner desde el siguiente enlace: [SonarScanner](https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner/).
+
+2.2  Si esta bien instalado deberas ver varios directorios entre ellos uno conf
+  ├── bin/                # Ejecutables de SonarScanner
+  ├── conf/               # Archivo de configuración de SonarScanner (modificar según sea necesario)
+  ├── jre/                # Máquina virtual Java integrada
+  └── lib/                # Librerías necesarias para ejecutar el escáner
+En ./conf asegurate de cambiar en el sonnar-scanner (archivo de propiedades) el URL del server de la siguiente forma:
+    #----- SonarQube server URL (default to SonarCloud)
+    sonar.host.url=http://localhost:9000
+
+2.3  Añade **SonarScanner** al `PATH` de tu sistema para que puedas ejecutar el comando desde cualquier directorio. Sigue las instrucciones proporcionadas en la página de instalación para asegurarte de que esté configurado correctamente.
 
 ### 3. Crear un Proyecto en SonarQube
 
 SonarQube es una herramienta diseñada para integrarse en entornos de desarrollo y pipelines, pero para esta práctica la ejecutaremos de manera local.
 
-1. Crea un proyecto local en SonarQube:
+- Crea un proyecto local en SonarQube:
  - En la página de SonarQube, selecciona **Create Project** y elige la opción **Local project**.
- - Se generará un **token de seguridad** que necesitarás para ejecutar el análisis del proyecto localmente. Guarda este token para usarlo en el siguiente paso.
+ - Usa los ***Global Settings** por default, presiona **Create the project**
+ - En **How do you want to analyze your repository?** selecciona nuevamente **Locally**
+ - Deja por defult la llave y da click en **Generate**
+  - Se generará un **token de seguridad** que necesitarás para ejecutar el análisis del proyecto localmente. Guarda este token para usarlo en el siguiente paso.
+ - Deja lo que viene por default en **Provide a token** simplemente da click en **Continuar**
+ - Selecciona la opción **Other** **(for JS.TS etc)** y selecciona tu sistema operativo
+ - Sonarqube te generara algo como esto:
+       "sonar-scanner.bat -D"sonar.projectKey=hola1" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.token=sqp_b425e93cdb5304f6424e5bd9226df4b5b05390f8""
+       **COPIA ese comando** es el comando que usaras mas adelante.
 
-### 4. Compilación del Proyecto
-
+### 4. Compilación de las clases de JAVA  archivos .java
 Para que SonarQube pueda realizar un análisis completo, es **necesario compilar el proyecto** antes de ejecutar el escaneo. SonarQube utiliza el bytecode generado por la compilación para calcular métricas avanzadas, como la **complejidad ciclomatica**, y para realizar un análisis exhaustivo del flujo de control del código.
 
 Si tu proyecto **NO** está en Maven:
@@ -49,9 +66,29 @@ Si tu proyecto **NO** está en Maven:
 
 ### 5. Ejecutar el Análisis del Proyecto
 
-1. Abre un terminal en el **directorio raíz** de tu proyecto.
-2. Ejecuta el siguiente comando para ejecutar el análisis con SonarScanner usando el token generado en el paso 3 (puedes copiarlo directamente de SonarQube):
-   ```bash
+5.1.  Abre un terminal en el **directorio raíz** de tu proyecto.
+  debes tener una estructura mas o menos asi:
+
+    ├── bin/               # Clases compiladas (.class)
+    ├── src/               # Archivos fuente de Java (.java)
+    ├── sonar-project.properties   # Configuración de SonarQube
+    └── README.md          # Este archivo
+
+  Asegúrate de tener el archivo sonar-project.properties configurado de la siguiente manera para que SonarQube pueda identificar correctamente los directorios:
+    sonar.projectKey=mi-proyecto-java
+    sonar.projectName=Analisis de Codigo Java
+    sonar.projectVersion=1.0
+    sonar.sources=src
+    sonar.java.binaries=bin
+    sonar.language=java
+
+5.2. Para analizar el proyecto con SonarQube, debes ejecutar el comando de SonarQube desde el directorio padre que contiene los subdirectorios `src` y `bin`. Es importante estar en la raíz del proyecto para que SonarQube pueda encontrar ambos directorios correctamente.
+
+### Pasos para ejecutar el análisis:
+
+    1. Abre una terminal o línea de comandos.
+    2. Navega al directorio padre del proyecto donde se encuentran ./bin y ./src como se explico anteriormente
+   desde la linea de comandos ejecuta el comando que genero en el **#Paso #3**
    sonar-scanner -Dsonar.projectKey=<tu_project_key> -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=<tu_token>
 
 Opcionalmente puedes tu correr el comando con esto:
