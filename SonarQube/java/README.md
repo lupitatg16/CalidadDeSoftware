@@ -4,19 +4,20 @@ Este repositorio contiene ejemplos de código Java para ser analizados con Sonar
 
 ## Estructura del Proyecto
 
-- **src/**: Contiene los archivos de código fuente Java:
+- **src/**: Contiene varios archivos de código fuente Java como los siguientes (puede haber más):
   - `SistemaGestionInventario.java`: Sistema básico de gestión de inventarios.
   - `SonarQubeDemo.java`: Ejemplo que muestra diversos problemas que SonarQube puede detectar.
-
-- **sonar-project.properties**: Archivo de configuración para SonarQube.
+  - `sonar-project.properties`: Archivo de configuración para SonarQube.
 
 ## Instrucciones para Ejecutar el Análisis con SonarQube
 
 ### 1. Instalación de SonarQube
 
-- Para esta práctica, usaremos la versión gratuita de SonarQube: [SonarQube Community Edition](https://www.sonarsource.com/open-source-editions/sonarqube-community-edition/).
+- Para esta práctica, usaremos la versión gratuita de SonarQube: [SonarQube Community Edition]:
+    https://www.sonarsource.com/open-source-editions/sonarqube-community-edition/).
 - Sigue las instrucciones de instalación en el siguiente enlace: [Instrucciones de instalación](https://docs.sonarsource.com/sonarqube/9.9/try-out-sonarqube/).
 - Añade **SonarQube** al `PATH` de tu sistema para poder arrancar el servidor de SonarQube desde cualquier directorio.
+     StartSonar
 - Una vez instalado y arrancado el servidor de SonarQube, abre un navegador web y ve a la siguiente dirección:
     http://localhost:9000/
 Aquí deberías ver la pantalla de inicio de sesión de SonarQube.
@@ -30,7 +31,7 @@ Para ejecutar el análisis del proyecto (si no está configurado con Maven), nec
 
 2.1 Descarga e instala SonarScanner desde el siguiente enlace: [SonarScanner](https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner/).
 
-2.2  Si esta bien instalado deberas ver varios directorios entre ellos uno conf
+2.2  Si esta bien instalado deberas ver varios directorios entre ellos uno conf:
   ├── bin/                # Ejecutables de SonarScanner
   ├── conf/               # Archivo de configuración de SonarScanner (modificar según sea necesario)
   ├── jre/                # Máquina virtual Java integrada
